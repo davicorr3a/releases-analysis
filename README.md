@@ -780,85 +780,101 @@ a classificação dos desenvolvedores. Ele opera da seguinte forma:
     > perfis técnicos dentro do projeto Bootstrap.
     
 ### **Script utilizado em python:**
+
 ```python
+"""
+ANÁLISE DE DESENVOLVEDORES GITHUB POR RELEASE
+Script que analisa contribuidores de releases específicas, classificando seus perfis técnicos
+baseados nas linguagens de programação que utilizam.
+"""
+
 import requests
 import pandas as pd
 import time
 
-# Configuração da API do GitHub
-GITHUB_TOKEN = "insira_o_seu_token_aqui"  # 👈 Substitua pelo seu token
-REPO = "twbs/bootstrap"  # 👈 Pode ser alterado para outro repositório
-HEADERS = {"Authorization": f"token {GITHUB_TOKEN}"}
+# 🔑 CONFIGURAÇÕES DA API DO GITHUB
+GITHUB_TOKEN = "insira_o_seu_token_aqui"  # Token de acesso pessoal do GitHub
+REPO = "twbs/bootstrap"  # Repositório a ser analisado (formato: 'dono/repo')
+HEADERS = {"Authorization": f"token {GITHUB_TOKEN}"}  # Cabeçalho para autenticação
 
-# Mapeamento de linguagens para perfis técnicos
+# 🗂 MAPEAMENTO DE LINGUAGENS PARA PERFIS TÉCNICOS
 ROLE_MAPPING = {
+    # Frontend
     "JavaScript": "Frontend",
     "TypeScript": "Frontend",
     "CSS": "Frontend",
     "HTML": "Frontend",
-    "Sass": "Frontend",
-    "Less": "Frontend",
+    # Backend
     "Python": "Backend",
-    "Jupyter Notebook": "Data Science",
-    "R": "Data Science",
     "Java": "Backend",
-    "C#": "Backend",
-    "Go": "Backend",
-    "PHP": "Backend",
-    "Ruby": "Backend",
+    # Data Science
+    "Jupyter Notebook": "Data Science",
+    # Mobile
     "Swift": "Mobile",
-    "Kotlin": "Mobile",
-    "Objective-C": "Mobile",
-    "Dart": "Mobile",
+    # DevOps
     "Shell": "DevOps",
-    "Dockerfile": "DevOps",
-    "Terraform": "DevOps",
-    "PowerShell": "DevOps"
+    # ... (outras linguagens podem ser adicionadas)
 }
 
-# Cache de dados
-processed_developers = {}
-processed_authors = set()
+# 📦 VARIÁVEIS GLOBAIS PARA ARMAZENAMENTO
+processed_developers = {}  # Cache de desenvolvedores processados
+processed_authors = set()  # Autores já identificados
 
 def get_commits_by_release(release_tag):
-    """Obtém commits de uma release específica"""
+    """
+    📌 Obtém todos os commits associados a uma release específica
+    Args:
+        release_tag (str): Tag da release (ex: 'v5.3.3')
+    Returns:
+        list: Lista de dicionários com informações dos commits
+    """
     url = f"https://api.github.com/repos/{REPO}/commits"
-    params = {"sha": release_tag, "per_page": 100}
+    params = {"sha": release_tag, "per_page": 100}  # Paginação para limitar resultados
+    
     response = requests.get(url, headers=HEADERS, params=params)
 
+    # Tratamento de erros
     if response.status_code == 401:
         print("❌ Erro: Token inválido! Verifique suas credenciais do GitHub.")
         exit(1)
-
     if response.status_code != 200:
         print(f"❌ Erro ao obter commits para {release_tag}: {response.json()}")
         return []
 
+    # Processa os commits
     return [{
-        "author": commit["author"]["login"] if commit.get("author") and commit["author"].get("login") 
-                else commit["commit"]["author"]["name"],
+        "author": commit["author"]["login"] if commit.get("author") else commit["commit"]["author"]["name"],
         "commit_message": commit["commit"]["message"],
         "release": release_tag
     } for commit in response.json()]
 
 def get_developer_info(username):
-    """Coleta informações detalhadas de um desenvolvedor"""
+    """
+    👤 Obtém informações detalhadas de um desenvolvedor
+    Args:
+        username (str): Login/nome do desenvolvedor
+    Returns:
+        dict: Dicionário com perfil completo ou None se erro
+    """
+    # Verifica cache primeiro
     if username in processed_developers:
         return processed_developers[username]
 
+    # Requisição à API do GitHub
     response = requests.get(f"https://api.github.com/users/{username}", headers=HEADERS)
 
+    # Tratamento de erros
     if response.status_code == 404:
-        print(f"⚠️ Usuário {username} não encontrado no GitHub.")
+        print(f"⚠️ Usuário {username} não encontrado.")
         return None
-
     if response.status_code != 200:
         print(f"❌ Erro ao obter usuário {username}")
         return None
 
+    # Processa dados do desenvolvedor
     user_data = response.json()
     languages = get_developer_languages(username)
-
+    
     dev_info = {
         "login": user_data.get("login"),
         "name": user_data.get("name"),
@@ -872,44 +888,63 @@ def get_developer_info(username):
         "releases": set()
     }
 
+    # Armazena em cache
     processed_developers[username] = dev_info
     return dev_info
 
 def get_developer_languages(username):
-    """Identifica as linguagens mais usadas pelo desenvolvedor"""
+    """
+    💻 Identifica as linguagens mais utilizadas por um desenvolvedor
+    Args:
+        username (str): Login do desenvolvedor
+    Returns:
+        list: Tuplas (linguagem, contagem) ordenadas por uso
+    """
     response = requests.get(
         f"https://api.github.com/users/{username}/repos",
         headers=HEADERS,
-        params={"per_page": 100}
+        params={"per_page": 100}  # Limite máximo por página
     )
 
     if response.status_code != 200:
         return []
 
-    repos = response.json()
+    # Contagem de linguagens nos repositórios
     lang_count = {}
-
-    for repo in repos:
+    for repo in response.json():
         if lang := repo.get("language"):
             lang_count[lang] = lang_count.get(lang, 0) + 1
 
     return sorted(lang_count.items(), key=lambda x: x[1], reverse=True)
 
 def classify_developer(languages):
-    """Classifica o perfil técnico baseado nas linguagens"""
+    """
+    🏷 Classifica o perfil técnico baseado nas linguagens
+    Args:
+        languages (list): Lista de tuplas (linguagem, contagem)
+    Returns:
+        str: Perfil(s) técnico(s) concatenados
+    """
     roles = {ROLE_MAPPING[lang] for lang, _ in languages if lang in ROLE_MAPPING}
     return ", ".join(roles) if roles else "Sem Classificação"
 
 def analyze_releases(release_tags):
-    """Função principal que coordena a análise"""
+    """
+    🚀 Função principal que coordena a análise
+    Args:
+        release_tags (list): Lista de tags de release para análise
+    """
     print("🚀 Iniciando análise de releases...")
-    
     all_commits = []
+
+    # Coleta commits de todas as releases
     for release_tag in release_tags:
         print(f"🔎 Analisando release: {release_tag}...")
-        all_commits.extend(get_commits_by_release(release_tag))
-        time.sleep(1)  # Rate limit
+        commits = get_commits_by_release(release_tag)
+        all_commits.extend(commits)
+        time.sleep(1)  # Respeita rate limit da API
 
+    # Processa cada commit
     for commit in all_commits:
         if dev_info := get_developer_info(commit["author"]):
             dev_info["commit_messages"].append(commit["commit_message"])
@@ -921,28 +956,34 @@ def analyze_releases(release_tags):
         dev["commit_messages"] = "; ".join(dev["commit_messages"])
         dev["languages"] = ", ".join([f"{lang} ({count})" for lang, count in dev["languages"]])
 
+    # Gera relatório
     df = pd.DataFrame(processed_developers.values())
     
     if not df.empty:
         file_path = "developer_analysis.csv"
         df.to_csv(file_path, index=False)
         print(f"\n✅ Análise concluída! Resultados salvos em {file_path}")
-        print(df.head())
+        print("📊 Amostra dos dados:\n", df.head())
     else:
         print("❌ Nenhum dado foi coletado")
 
-# Execução
+# Ponto de entrada do script
 if __name__ == "__main__":
-    print("📌 GitHub Developer Analyzer")
-    print("Exemplo: v5.3.3, v5.2.0\n")
+    print("""
+    📌 GitHub Developer Analyzer
+    --------------------------
+    Analisa contribuidores de releases específicas,
+    classificando seus perfis técnicos.
+    """)
+    
+    # Exemplo: v5.3.3, v5.2.0
     release_input = input("Digite as releases separadas por vírgula: ")
     analyze_releases([r.strip() for r in release_input.split(",")])
 ```
 
 ### **Segunda etapa da atividade - Resultados e conclusões com base na análise de algumas releases**
 
-![](vertopal_04e1492f86f4466680dd494d4791a264/media/image1.png){width="6.267716535433071in"
-height="2.611111111111111in"}
+![image](https://github.com/user-attachments/assets/c6bc7367-4f8c-4e2c-a21e-18461528a1bc)
 
 ### **Resultados da Análise**
 

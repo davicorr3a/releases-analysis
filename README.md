@@ -792,12 +792,12 @@ import requests
 import pandas as pd
 import time
 
-# 🔑 CONFIGURAÇÕES DA API DO GITHUB
+# CONFIGURAÇÕES DA API DO GITHUB
 GITHUB_TOKEN = "insira_o_seu_token_aqui"  # Token de acesso pessoal do GitHub
 REPO = "twbs/bootstrap"  # Repositório a ser analisado (formato: 'dono/repo')
 HEADERS = {"Authorization": f"token {GITHUB_TOKEN}"}  # Cabeçalho para autenticação
 
-# 🗂 MAPEAMENTO DE LINGUAGENS PARA PERFIS TÉCNICOS
+# MAPEAMENTO DE LINGUAGENS PARA PERFIS TÉCNICOS
 ROLE_MAPPING = {
     # Frontend
     "JavaScript": "Frontend",
@@ -816,13 +816,13 @@ ROLE_MAPPING = {
     # ... (outras linguagens podem ser adicionadas)
 }
 
-# 📦 VARIÁVEIS GLOBAIS PARA ARMAZENAMENTO
+# VARIÁVEIS GLOBAIS PARA ARMAZENAMENTO
 processed_developers = {}  # Cache de desenvolvedores processados
 processed_authors = set()  # Autores já identificados
 
 def get_commits_by_release(release_tag):
     """
-    📌 Obtém todos os commits associados a uma release específica
+    Obtém todos os commits associados a uma release específica
     Args:
         release_tag (str): Tag da release (ex: 'v5.3.3')
     Returns:
@@ -835,10 +835,10 @@ def get_commits_by_release(release_tag):
 
     # Tratamento de erros
     if response.status_code == 401:
-        print("❌ Erro: Token inválido! Verifique suas credenciais do GitHub.")
+        print("Erro: Token inválido! Verifique suas credenciais do GitHub.")
         exit(1)
     if response.status_code != 200:
-        print(f"❌ Erro ao obter commits para {release_tag}: {response.json()}")
+        print(f"Erro ao obter commits para {release_tag}: {response.json()}")
         return []
 
     # Processa os commits
@@ -850,7 +850,7 @@ def get_commits_by_release(release_tag):
 
 def get_developer_info(username):
     """
-    👤 Obtém informações detalhadas de um desenvolvedor
+    Obtém informações detalhadas de um desenvolvedor
     Args:
         username (str): Login/nome do desenvolvedor
     Returns:
@@ -865,10 +865,10 @@ def get_developer_info(username):
 
     # Tratamento de erros
     if response.status_code == 404:
-        print(f"⚠️ Usuário {username} não encontrado.")
+        print(f"Usuário {username} não encontrado.")
         return None
     if response.status_code != 200:
-        print(f"❌ Erro ao obter usuário {username}")
+        print(f"Erro ao obter usuário {username}")
         return None
 
     # Processa dados do desenvolvedor
@@ -894,7 +894,7 @@ def get_developer_info(username):
 
 def get_developer_languages(username):
     """
-    💻 Identifica as linguagens mais utilizadas por um desenvolvedor
+    Identifica as linguagens mais utilizadas por um desenvolvedor
     Args:
         username (str): Login do desenvolvedor
     Returns:
@@ -930,16 +930,16 @@ def classify_developer(languages):
 
 def analyze_releases(release_tags):
     """
-    🚀 Função principal que coordena a análise
+    Função principal que coordena a análise
     Args:
         release_tags (list): Lista de tags de release para análise
     """
-    print("🚀 Iniciando análise de releases...")
+    print("Iniciando análise de releases...")
     all_commits = []
 
     # Coleta commits de todas as releases
     for release_tag in release_tags:
-        print(f"🔎 Analisando release: {release_tag}...")
+        print(f"Analisando release: {release_tag}...")
         commits = get_commits_by_release(release_tag)
         all_commits.extend(commits)
         time.sleep(1)  # Respeita rate limit da API
@@ -962,15 +962,15 @@ def analyze_releases(release_tags):
     if not df.empty:
         file_path = "developer_analysis.csv"
         df.to_csv(file_path, index=False)
-        print(f"\n✅ Análise concluída! Resultados salvos em {file_path}")
-        print("📊 Amostra dos dados:\n", df.head())
+        print(f"\n Análise concluída! Resultados salvos em {file_path}")
+        print(" Amostra dos dados:\n", df.head())
     else:
-        print("❌ Nenhum dado foi coletado")
+        print(" Nenhum dado foi coletado")
 
 # Ponto de entrada do script
 if __name__ == "__main__":
     print("""
-    📌 GitHub Developer Analyzer
+    GitHub Developer Analyzer
     --------------------------
     Analisa contribuidores de releases específicas,
     classificando seus perfis técnicos.
@@ -982,6 +982,8 @@ if __name__ == "__main__":
 ```
 
 ### **Segunda etapa da atividade - Resultados e conclusões com base na análise de algumas releases**
+
+ ## Exemplo do csv gerado:
 
 ![image](https://github.com/user-attachments/assets/c6bc7367-4f8c-4e2c-a21e-18461528a1bc)
 

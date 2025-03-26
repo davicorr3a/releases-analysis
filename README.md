@@ -19,44 +19,31 @@ estratégia de releases do projeto.
 **Data de lançamento:** 20 de fevereiro de 2024\
 **Principais mudanças:**
 
--   Correção de uma alteração crítica introduzida no gerenciamento de
-    > cores, garantindo compatibilidade com compilações Sass.
+-   Correção de uma alteração crítica introduzida no gerenciamento de cores, garantindo compatibilidade com compilações Sass.
 
--   Melhorias na acessibilidade e renderização de badges para garantir
-    > legibilidade em diferentes temas (light/dark mode).
+-   Melhorias na acessibilidade e renderização de badges para garantir legibilidade em diferentes temas (light/dark mode).
 
 -   Ajustes na documentação para esclarecer o uso do color-scheme().
 
--   Melhorias na sanitização do HTML para permitir elementos \<dl\>,
-    > \<dt\> e \<dd\>.
+-   Melhorias na sanitização do HTML para permitir elementos \<dl\>, \<dt\> e \<dd\>.
 
--   Correções visuais em componentes como **accordion, buttons e navbar
-    > toggler**.
+-   Correções visuais em componentes como **accordion, buttons e navbar toggler**.
 
--   Ajustes no RTL (Right-to-Left) do carrossel e modais para melhor
-    > exibição em idiomas que usam escrita da direita para a esquerda.
+-   Ajustes no RTL (Right-to-Left) do carrossel e modais para melhor exibição em idiomas que usam escrita da direita para a esquerda.
 
--   Atualização de dependências e melhorias no pipeline de testes
-    > automatizados.
+-   Atualização de dependências e melhorias no pipeline de testes automatizados.
 
 **Características Relevantes:**
 
--   **Áreas afetadas:** CSS, JavaScript, Documentação, Infraestrutura
-    > DevOps.
+-   **Áreas afetadas:** CSS, JavaScript, Documentação, Infraestrutura DevOps.
 
--   **Perfis técnicos envolvidos:** Principalmente desenvolvedores
-    > **Frontend** (devido às melhorias no CSS e temas) e **DevOps**
-    > (ajustes no pipeline CI/CD).
+-   **Perfis técnicos envolvidos:** Principalmente desenvolvedores **Frontend** (devido às melhorias no CSS e temas) e **DevOps** (ajustes no pipeline CI/CD).
 
--   **Contribuidores principais:** Equipe central do Bootstrap e membros
-    > recorrentes da comunidade open-source.
+-   **Contribuidores principais:** Equipe central do Bootstrap e membros recorrentes da comunidade open-source.
 
--   **Padrões arquiteturais aplicados:** Modularidade no Sass,
-    > saneamento de HTML para segurança.
+-   **Padrões arquiteturais aplicados:** Modularidade no Sass, saneamento de HTML para segurança.
 
--   **Frequência de contribuição por tipo de desenvolvedor:**
-    > Predominância de contribuições de **Frontend Engineers**, seguidos
-    > por DevOps e Documentação.
+-   **Frequência de contribuição por tipo de desenvolvedor:** Predominância de contribuições de **Frontend Engineers**, seguidos por DevOps e Documentação.
 
 ### **Release 2: v5.3.2**
 
@@ -64,55 +51,41 @@ estratégia de releases do projeto.
 
 **Principais mudanças:**
 
--   Correção de warnings de depreciação do Sass relacionados ao uso de
-    > abs() e divide().
+-   Correção de warnings de depreciação do Sass relacionados ao uso de abs() e divide().
 
 -   Melhorias na compatibilidade com **Dart Sass v1.65.0**.
 
--   Correção de problemas no sistema de colapso do Bootstrap ao usar
-    > múltiplos IDs.
+-   Correção de problemas no sistema de colapso do Bootstrap ao usar múltiplos IDs.
 
--   Aumento do contraste do fundo do **form range track** para melhor
-    > acessibilidade em temas claros e escuros.
+-   Aumento do contraste do fundo do **form range track** para melhor acessibilidade em temas claros e escuros.
 
 -   Melhorias no suporte à personalização da cor de elementos \<mark\>.
 
--   Atualizações na documentação, incluindo links para **Discord** e
-    > **subreddit do Bootstrap**.
+-   Atualizações na documentação, incluindo links para **Discord** e **subreddit do Bootstrap**.
 
--   Uso de variáveis CSS para box-shadow, melhorando a flexibilidade das
-    > personalizações.
+-   Uso de variáveis CSS para box-shadow, melhorando a flexibilidade das personalizações.
 
 -   Melhorias em testes e atualização de dependências do projeto.
 
 **Características Relevantes:**
 
--   **Áreas afetadas:** CSS, JavaScript, Documentação, Acessibilidade,
-    > Infraestrutura.
+-   **Áreas afetadas:** CSS, JavaScript, Documentação, Acessibilidade, Infraestrutura.
 
 -   **Perfis técnicos envolvidos:**
 
-    -   **Frontend Engineers** (principais mudanças no CSS e sistema de
-        > cores).
+    -   **Frontend Engineers** (principais mudanças no CSS e sistema de cores).
 
-    -   **JavaScript Developers** (correções no comportamento do sistema
-        > de colapso).
+    -   **JavaScript Developers** (correções no comportamento do sistema de colapso).
 
-    -   **Documentação** (atualização de guias e referências da
-        > comunidade).
+    -   **Documentação** (atualização de guias e referências da comunidade).
 
-    -   **DevOps** (atualização de scripts de build e permissões do
-        > CI/CD).
+    -   **DevOps** (atualização de scripts de build e permissões do CI/CD).
 
--   **Contribuidores principais:** Mantenedores do Bootstrap e
-    > contribuidores da comunidade.
+-   **Contribuidores principais:** Mantenedores do Bootstrap e contribuidores da comunidade.
 
--   **Padrões arquiteturais aplicados:** Modularização do Sass,
-    > utilização de variáveis CSS para personalização.
+-   **Padrões arquiteturais aplicados:** Modularização do Sass, utilização de variáveis CSS para personalização.
 
--   **Frequência de contribuição por tipo de desenvolvedor:** Forte
-    > presença de desenvolvedores **Frontend**, seguido por
-    > especialistas em **JavaScript e Documentação**.
+-   **Frequência de contribuição por tipo de desenvolvedor:** Forte presença de desenvolvedores **Frontend**, seguido por especialistas em **JavaScript e Documentação**.
 
 ### **Release 3: v5.3.1**
 
@@ -127,13 +100,11 @@ estratégia de releases do projeto.
 
     -   Melhor estilização para .nav-links desabilitados.
 
-    -   Suporte às teclas **Home** e **End** para navegação entre abas
-        > via teclado.
+    -   Suporte às teclas **Home** e **End** para navegação entre abas via teclado.
 
     -   Ajustes na cor do **carousel** em modo escuro.
 
--   **Aprimoramento de formulários:** Correção da cor do texto de labels
-    > flutuantes desativadas.
+-   **Aprimoramento de formulários:** Correção da cor do texto de labels flutuantes desativadas.
 
 -   **Novos utilitários:** .text-bg-\* agora utiliza variáveis CSS.
 
@@ -143,8 +114,7 @@ estratégia de releases do projeto.
 
     -   Remoção de variáveis duplicadas \$alert-\*.
 
-    -   Nova variável \$vr-border-width para customizar a largura do
-        > vertical rule helper.
+    -   Nova variável \$vr-border-width para customizar a largura do vertical rule helper.
 
 -   **Documentação:**
 
@@ -156,125 +126,93 @@ estratégia de releases do projeto.
 
 **Características Relevantes:**
 
--   **Áreas afetadas:** CSS, JavaScript, Acessibilidade, Sass,
-    > Documentação.
+-   **Áreas afetadas:** CSS, JavaScript, Acessibilidade, Sass, Documentação.
 
 -   **Perfis técnicos envolvidos:**
 
-    -   **Frontend Engineers** (refinamento de estilos, melhorias na
-        > navegação e acessibilidade).
+    -   **Frontend Engineers** (refinamento de estilos, melhorias na navegação e acessibilidade).
 
-    -   **JavaScript Developers** (suporte a novos atalhos no teclado e
-        > melhorias no script de troca de tema).
+    -   **JavaScript Developers** (suporte a novos atalhos no teclado e melhorias no script de troca de tema).
 
-    -   **UX Designers** (melhorias no contraste e experiência do
-        > usuário no modo escuro).
+    -   **UX Designers** (melhorias no contraste e experiência do usuário no modo escuro).
 
-    -   **Documentação** (adaptação da homepage e melhorias de
-        > usabilidade).
+    -   **Documentação** (adaptação da homepage e melhorias de usabilidade).
 
--   **Contribuidores principais:** Mantenedores do Bootstrap e
-    > colaboradores recorrentes.
+-   **Contribuidores principais:** Mantenedores do Bootstrap e colaboradores recorrentes.
 
--   **Padrões arquiteturais aplicados:** Modularização do CSS e
-    > JavaScript, melhoria contínua da experiência do usuário.
+-   **Padrões arquiteturais aplicados:** Modularização do CSS e JavaScript, melhoria contínua da experiência do usuário.
 
--   **Frequência de contribuição por tipo de desenvolvedor:** Forte
-    > presença de **Frontend Engineers**, UX Designers e Documentação.
+-   **Frequência de contribuição por tipo de desenvolvedor:** Forte presença de **Frontend Engineers**, UX Designers e Documentação.
 
 ### **Release v5.3.0-alpha2 (Pré-release)**
 
 **Data de lançamento:** \[Data não informada\]\
 **Principais mudanças:**
 
--   Introdução do **modo escuro** aprimorado, com suporte aprimorado
-    > para temas adaptáveis.
+-   Introdução do **modo escuro** aprimorado, com suporte aprimorado para temas adaptáveis.
 
--   Adição da classe .nav-underline para melhor estilização de
-    > navegação.
+-   Adição da classe .nav-underline para melhor estilização de navegação.
 
--   Melhorias na acessibilidade e suporte para atalhos de teclado em
-    > navegação por abas.
+-   Melhorias na acessibilidade e suporte para atalhos de teclado em navegação por abas.
 
--   Ajustes no **progress bar**, formulários e componentes interativos
-    > para maior consistência visual.
+-   Ajustes no **progress bar**, formulários e componentes interativos para maior consistência visual.
 
--   Reestruturação do Sass e variáveis CSS para facilitar a
-    > personalização de temas.
+-   Reestruturação do Sass e variáveis CSS para facilitar a personalização de temas.
 
--   Melhorias na documentação, incluindo novas seções sobre utilitários
-    > de cores e acessibilidade.
+-   Melhorias na documentação, incluindo novas seções sobre utilitários de cores e acessibilidade.
 
--   Atualizações na lógica de eventos do **offcanvas e modais** para
-    > comportamento mais previsível.
+-   Atualizações na lógica de eventos do **offcanvas e modais** para comportamento mais previsível.
 
--   Ajustes no sistema de cores para maior conformidade com o padrão
-    > **WCAG 2.2**.
+-   Ajustes no sistema de cores para maior conformidade com o padrão **WCAG 2.2**.
 
--   Correções de compatibilidade com navegadores, incluindo melhorias
-    > para Android Chrome.
+-   Correções de compatibilidade com navegadores, incluindo melhorias para Android Chrome.
 
--   Atualizações no framework de testes e pipeline de build para melhor
-    > desempenho.
+-   Atualizações no framework de testes e pipeline de build para melhor desempenho.
 
 **Características Relevantes:**
 
--   **Áreas afetadas:** CSS, JavaScript, Documentação, Acessibilidade,
-    > DevOps.
+-   **Áreas afetadas:** CSS, JavaScript, Documentação, Acessibilidade, DevOps.
 
 -   **Perfis técnicos envolvidos:**
 
-    -   **Frontend Engineers** (trabalho extenso em cores, utilitários,
-        > e acessibilidade).
+    -   **Frontend Engineers** (trabalho extenso em cores, utilitários, e acessibilidade).
 
-    -   **JavaScript Developers** (ajustes em eventos e interatividade
-        > de componentes).
+    -   **JavaScript Developers** (ajustes em eventos e interatividade de componentes).
 
-    -   **UX Designers** (melhoria no contraste de cores e foco na
-        > experiência do usuário).
+    -   **UX Designers** (melhoria no contraste de cores e foco na experiência do usuário).
 
-    -   **Documentação** (expansão dos guias e aprimoramento de
-        > exemplos).
+    -   **Documentação** (expansão dos guias e aprimoramento de exemplos).
 
--   **Contribuidores principais:** Membros da equipe central do
-    > Bootstrap e comunidade open-source.
+-   **Contribuidores principais:** Membros da equipe central do Bootstrap e comunidade open-source.
 
--   **Padrões arquiteturais aplicados:** Modularização do Sass,
-    > melhorias na separação entre temas claros e escuros.
+-   **Padrões arquiteturais aplicados:** Modularização do Sass, melhorias na separação entre temas claros e escuros.
 
--   **Frequência de contribuição por tipo de desenvolvedor:** Forte
-    > presença de **Frontend Engineers**, seguidos por **JavaScript
-    > Developers** e **especialistas em acessibilidade**.
+-   **Frequência de contribuição por tipo de desenvolvedor:** Forte presença de **Frontend Engineers**, seguidos por **JavaScript Developers** e **especialistas em acessibilidade**.
 
 ### **Release v5.2.2**
 
 **Data de lançamento:** 3 de outubro de 2022\
 **Principais mudanças:**
 
--   **Accordion:** Agora usa uma variável Sass para cor em vez de uma
-    > variável CSS inválida.
+-   **Accordion:** Agora usa uma variável Sass para cor em vez de uma variável CSS inválida.
 
 -   **Botões:** Ajustes na estilização do hover para .btn-check.
 
--   **Dropdowns:** Restaurada a funcionalidade de dropdowns sem
-    > data-attribute (mas será removida novamente no v6).
+-   **Dropdowns:** Restaurada a funcionalidade de dropdowns sem data-attribute (mas será removida novamente no v6).
 
 -   **Modais:** Melhorias nos eventos dos modais.
 
--   **Tabelas:** Correção na redefinição do \$border-color dentro do
-    > mixin table-variant().
+-   **Tabelas:** Correção na redefinição do \$border-color dentro do mixin table-variant().
 
 -   **Tabs:**
 
-    -   Removido o **autofocus** automático que causava saltos na página
-        > ao ativar tabs.
+    -   Removido o **autofocus** automático que causava saltos na página ao ativar tabs.
 
     -   Ajuste na alternância da classe .active dentro de dropdowns.
 
 -   **Toasts:** Ajuste no z-index das **notificações toast**.
 
--   **Tooltips:** Correção nos **seletores de tooltips** para elementos
-    > criados dinamicamente.
+-   **Tooltips:** Correção nos **seletores de tooltips** para elementos criados dinamicamente.
 
 **Características Relevantes:**
 
@@ -284,65 +222,50 @@ estratégia de releases do projeto.
 
     -   **Frontend Engineers** (ajustes no Sass e variáveis CSS).
 
-    -   **JavaScript Developers** (correção de comportamento de
-        > tooltips, modais e tabs).
+    -   **JavaScript Developers** (correção de comportamento de tooltips, modais e tabs).
 
-    -   **UX Designers e Acessibilidade** (melhoria na usabilidade de
-        > componentes interativos).
+    -   **UX Designers e Acessibilidade** (melhoria na usabilidade de componentes interativos).
 
-    -   **Documentação** (atualizações em exemplos e explicações de
-        > comportamento dos componentes).
+    -   **Documentação** (atualizações em exemplos e explicações de comportamento dos componentes).
 
--   **Contribuidores principais:** Equipe Bootstrap e membros da
-    > comunidade open-source.
+-   **Contribuidores principais:** Equipe Bootstrap e membros da comunidade open-source.
 
--   **Padrões arquiteturais aplicados:** Modularização do CSS, melhoria
-    > da acessibilidade e refinamento da experiência do usuário.
+-   **Padrões arquiteturais aplicados:** Modularização do CSS, melhoria da acessibilidade e refinamento da experiência do usuário.
 
--   **Frequência de contribuição por tipo de desenvolvedor:**
-    > Equilibrada entre **Frontend Engineers, JavaScript Developers e UX
-    > Designers**.
+-   **Frequência de contribuição por tipo de desenvolvedor:** Equilibrada entre **Frontend Engineers, JavaScript Developers e UX Designers**.
 
 ### **Análise da Release v5.2.1**
 
 **Data de lançamento:** 7 de setembro de 2022\
 **Principais mudanças:**
 
--   **Accordion:** Agora usa a variável Sass \$accordion-button-color
-    > para definir cores em vez da função de contraste.
+-   **Accordion:** Agora usa a variável Sass \$accordion-button-color para definir cores em vez da função de contraste.
 
 -   **Botões:**
 
-    -   Adicionada uma variável CSS para a **cor da borda no hover** de
-        > botões transparentes.
+    -   Adicionada uma variável CSS para a **cor da borda no hover** de botões transparentes.
 
-    -   .btn-link não apresenta mais gradiente quando \$enable-gradients
-        > está ativado.
+    -   .btn-link não apresenta mais gradiente quando \$enable-gradients está ativado.
 
 -   **Formulários:**
 
-    -   Ajustado o **z-index** do input-group para garantir renderização
-        > correta em campos validados.
+    -   Ajustado o **z-index** do input-group para garantir renderização correta em campos validados.
 
-    -   Floating labels agora redefinem text-align para garantir
-        > estilização consistente.
+    -   Floating labels agora redefinem text-align para garantir estilização consistente.
 
 -   **List Groups:**
 
-    -   Ajustes para garantir que **list groups horizontais** com um
-        > único item renderizem corretamente o border-radius.
+    -   Ajustes para garantir que **list groups horizontais** com um único item renderizem corretamente o border-radius.
 
     -   Melhor suporte para imports aninhados da CSS do Bootstrap.
 
 -   **Modais:**
 
-    -   Correção nos **event listeners**, permitindo que cliques na
-        > scrollbar não fechem o modal.
+    -   Correção nos **event listeners**, permitindo que cliques na scrollbar não fechem o modal.
 
 -   **Paginação:**
 
-    -   Ajuste nos valores de border-radius dentro dos componentes de
-        > paginação.
+    -   Ajuste nos valores de border-radius dentro dos componentes de paginação.
 
 -   **Scrollspy:**
 
@@ -350,8 +273,7 @@ estratégia de releases do projeto.
 
 -   **Tooltips:**
 
-    -   Algumas alterações no plugin de tooltips foram revertidas para
-        > evitar problemas com seletores e tooltips dinâmicos.
+    -   Algumas alterações no plugin de tooltips foram revertidas para evitar problemas com seletores e tooltips dinâmicos.
 
 **Características Relevantes:**
 
@@ -361,24 +283,17 @@ estratégia de releases do projeto.
 
     -   **Frontend Engineers** (ajustes no Sass e componentes visuais).
 
-    -   **JavaScript Developers** (correções no comportamento de
-        > tooltips, modais e scrollspy).
+    -   **JavaScript Developers** (correções no comportamento de tooltips, modais e scrollspy).
 
-    -   **UX Designers e Acessibilidade** (melhoria na navegabilidade e
-        > experiência do usuário).
+    -   **UX Designers e Acessibilidade** (melhoria na navegabilidade e experiência do usuário).
 
-    -   **Documentação** (expansão de exemplos e guias sobre o
-        > comportamento dos componentes).
+    -   **Documentação** (expansão de exemplos e guias sobre o comportamento dos componentes).
 
--   **Contribuidores principais:** Equipe Bootstrap e membros da
-    > comunidade open-source.
+-   **Contribuidores principais:** Equipe Bootstrap e membros da comunidade open-source.
 
--   **Padrões arquiteturais aplicados:** Modularização do CSS, melhoria
-    > na acessibilidade e refinamento na experiência do usuário.
+-   **Padrões arquiteturais aplicados:** Modularização do CSS, melhoria na acessibilidade e refinamento na experiência do usuário.
 
--   **Frequência de contribuição por tipo de desenvolvedor:** Forte
-    > presença de **Frontend Engineers e JavaScript Developers**, com
-    > suporte significativo de **especialistas em UX/Acessibilidade**.
+-   **Frequência de contribuição por tipo de desenvolvedor:** Forte presença de **Frontend Engineers e JavaScript Developers**, com suporte significativo de **especialistas em UX/Acessibilidade**.
 
 ### **Análise da Release v5.2.0**
 
@@ -403,28 +318,19 @@ desenvolvedores sobre o uso do framework.
 
 -   **Perfis técnicos envolvidos:**
 
-    -   **Frontend Engineers** (ajustes nos componentes visuais e
-        > comportamento do Scrollspy).
+    -   **Frontend Engineers** (ajustes nos componentes visuais e comportamento do Scrollspy).
 
-    -   **JavaScript Developers** (correções em eventos de modais,
-        > tooltips e interações com popovers).
+    -   **JavaScript Developers** (correções em eventos de modais, tooltips e interações com popovers).
 
-    -   **UX Designers e Acessibilidade** (melhorias no design e na
-        > experiência do usuário em formulários e navegação).
+    -   **UX Designers e Acessibilidade** (melhorias no design e na experiência do usuário em formulários e navegação).
 
-    -   **Documentação** (novos guias e atualizações para Webpack,
-        > Parcel e Vite).
+    -   **Documentação** (novos guias e atualizações para Webpack, Parcel e Vite).
 
--   **Contribuidores principais:** Equipe Bootstrap e colaboradores da
-    > comunidade open-source.
+-   **Contribuidores principais:** Equipe Bootstrap e colaboradores da comunidade open-source.
 
--   **Padrões arquiteturais aplicados:** Modularização do CSS,
-    > refinamento da experiência do usuário e suporte aprimorado para
-    > frameworks modernos.
+-   **Padrões arquiteturais aplicados:** Modularização do CSS, refinamento da experiência do usuário e suporte aprimorado para frameworks modernos.
 
--   **Frequência de contribuição por tipo de desenvolvedor:**
-    > Equilibrada entre **Frontend Engineers, JavaScript Developers e
-    > especialistas em acessibilidade**.
+-   **Frequência de contribuição por tipo de desenvolvedor:** Equilibrada entre **Frontend Engineers, JavaScript Developers e especialistas em acessibilidade**.
 
 ### **Análise da Release v4.6.2**
 
@@ -449,26 +355,17 @@ do framework.
 
     -   **Frontend Engineers** (ajustes no Sass e melhorias visuais).
 
-    -   **JavaScript Developers** (adição da classe de colapso
-        > horizontal e refinamentos no Collapse Plugin).
+    -   **JavaScript Developers** (adição da classe de colapso horizontal e refinamentos no Collapse Plugin).
 
-    -   **UX Designers e Acessibilidade** (melhoria na experiência do
-        > usuário em dropdowns e contrastes de cores).
+    -   **UX Designers e Acessibilidade** (melhoria na experiência do usuário em dropdowns e contrastes de cores).
 
-    -   **Documentação** (correção de links e aprimoramento do material
-        > explicativo).
+    -   **Documentação** (correção de links e aprimoramento do material explicativo).
 
--   **Contribuidores principais:** Equipe Bootstrap e novos
-    > colaboradores da comunidade open-source.
+-   **Contribuidores principais:** Equipe Bootstrap e novos colaboradores da comunidade open-source.
 
--   **Padrões arquiteturais aplicados:** Modularização do CSS,
-    > aprimoramento da acessibilidade e refinamento da experiência do
-    > usuário.
+-   **Padrões arquiteturais aplicados:** Modularização do CSS, aprimoramento da acessibilidade e refinamento da experiência do usuário.
 
--   **Frequência de contribuição por tipo de desenvolvedor:**
-    > Predominância de **Frontend Engineers e Documentação**, com
-    > suporte de **JavaScript Developers** e **especialistas em
-    > acessibilidade**.
+-   **Frequência de contribuição por tipo de desenvolvedor:** Predominância de **Frontend Engineers e Documentação**, com suporte de **JavaScript Developers** e **especialistas em acessibilidade**.
 
 ### **Análise da Release v5.2.0-beta1 (Pré-release)**
 
@@ -494,28 +391,19 @@ dropdowns centralizados**.
 
 -   **Perfis técnicos envolvidos:**
 
-    -   **Frontend Engineers** (expansão das CSS variables e refinamento
-        > visual dos componentes).
+    -   **Frontend Engineers** (expansão das CSS variables e refinamento visual dos componentes).
 
-    -   **JavaScript Developers** (melhorias na modularização e
-        > performance dos componentes interativos).
+    -   **JavaScript Developers** (melhorias na modularização e performance dos componentes interativos).
 
-    -   **UX Designers e Acessibilidade** (ajustes para tornar os
-        > componentes mais intuitivos e acessíveis).
+    -   **UX Designers e Acessibilidade** (ajustes para tornar os componentes mais intuitivos e acessíveis).
 
-    -   **Performance Engineers** (otimização do Scrollspy e refatoração
-        > do código para eficiência).
+    -   **Performance Engineers** (otimização do Scrollspy e refatoração do código para eficiência).
 
--   **Contribuidores principais:** Equipe Bootstrap e comunidade
-    > open-source.
+-   **Contribuidores principais:** Equipe Bootstrap e comunidade open-source.
 
--   **Padrões arquiteturais aplicados:** Modularização do CSS e
-    > JavaScript, implementação de práticas acessíveis e otimização de
-    > desempenho.
+-   **Padrões arquiteturais aplicados:** Modularização do CSS e JavaScript, implementação de práticas acessíveis e otimização de desempenho.
 
--   **Frequência de contribuição por tipo de desenvolvedor:**
-    > Equilibrada entre **Frontend Engineers, JavaScript Developers e
-    > especialistas em Acessibilidade**.
+-   **Frequência de contribuição por tipo de desenvolvedor:** Equilibrada entre **Frontend Engineers, JavaScript Developers e especialistas em Acessibilidade**.
 
 ### **Análise da Release v4.6.1**
 
@@ -534,33 +422,23 @@ exibição de ícones de feedback** e no comportamento de componentes como
 
 **Características Relevantes:**
 
--   **Áreas afetadas:** CSS, JavaScript, Acessibilidade, Infraestrutura
-    > DevOps.
+-   **Áreas afetadas:** CSS, JavaScript, Acessibilidade, Infraestrutura DevOps.
 
 -   **Perfis técnicos envolvidos:**
 
     -   **Frontend Engineers** (ajustes no Sass e refinamentos visuais).
 
-    -   **JavaScript Developers** (melhorias na acessibilidade e
-        > comportamento dos modais e dropdowns).
+    -   **JavaScript Developers** (melhorias na acessibilidade e comportamento dos modais e dropdowns).
 
-    -   **DevOps** (atualizações nas versões do Node.js e refinamento
-        > das dependências do projeto).
+    -   **DevOps** (atualizações nas versões do Node.js e refinamento das dependências do projeto).
 
-    -   **Especialistas em Acessibilidade** (ajustes na navegação do
-        > carrossel e aprimoramento de atributos ARIA).
+    -   **Especialistas em Acessibilidade** (ajustes na navegação do carrossel e aprimoramento de atributos ARIA).
 
--   **Contribuidores principais:** Equipe Bootstrap e membros ativos da
-    > comunidade open-source.
+-   **Contribuidores principais:** Equipe Bootstrap e membros ativos da comunidade open-source.
 
--   **Padrões arquiteturais aplicados:** Refatoração de código para
-    > compatibilidade futura, aprimoramento da acessibilidade e
-    > correções de comportamento.
+-   **Padrões arquiteturais aplicados:** Refatoração de código para compatibilidade futura, aprimoramento da acessibilidade e correções de comportamento.
 
--   **Frequência de contribuição por tipo de desenvolvedor:**
-    > Predominância de **Frontend Engineers e DevOps**, com
-    > contribuições significativas de **especialistas em Acessibilidade
-    > e JavaScript Developers**.
+-   **Frequência de contribuição por tipo de desenvolvedor:** Predominância de **Frontend Engineers e DevOps**, com contribuições significativas de **especialistas em Acessibilidade e JavaScript Developers**.
 
 ### **Análise da Release v5.1.2**
 
@@ -582,33 +460,23 @@ relatórios de problemas.
 
 **Características Relevantes:**
 
--   **Áreas afetadas:** CSS, JavaScript, Documentação, Infraestrutura
-    > DevOps.
+-   **Áreas afetadas:** CSS, JavaScript, Documentação, Infraestrutura DevOps.
 
 -   **Perfis técnicos envolvidos:**
 
-    -   **Frontend Engineers** (ajustes na renderização de formulários e
-        > botões).
+    -   **Frontend Engineers** (ajustes na renderização de formulários e botões).
 
-    -   **JavaScript Developers** (correção no comportamento do
-        > Collapse).
+    -   **JavaScript Developers** (correção no comportamento do Collapse).
 
-    -   **Especialistas em Segurança** (melhoria no sanitizador de
-        > URLs).
+    -   **Especialistas em Segurança** (melhoria no sanitizador de URLs).
 
-    -   **Documentação** (revisão de guias e implementação de templates
-        > para issues no GitHub).
+    -   **Documentação** (revisão de guias e implementação de templates para issues no GitHub).
 
--   **Contribuidores principais:** Equipe Bootstrap e colaboradores da
-    > comunidade open-source.
+-   **Contribuidores principais:** Equipe Bootstrap e colaboradores da comunidade open-source.
 
--   **Padrões arquiteturais aplicados:** Modularização do CSS e
-    > JavaScript, aprimoramento da experiência do usuário e refinamento
-    > da documentação.
+-   **Padrões arquiteturais aplicados:** Modularização do CSS e JavaScript, aprimoramento da experiência do usuário e refinamento da documentação.
 
--   **Frequência de contribuição por tipo de desenvolvedor:**
-    > Equilibrada entre **Frontend Engineers, JavaScript Developers e
-    > especialistas em Segurança**.
+-   **Frequência de contribuição por tipo de desenvolvedor:** Equilibrada entre **Frontend Engineers, JavaScript Developers e especialistas em Segurança**.
 
 ### **Perfil Geral da Estratégia de Releases do Bootstrap**
 
@@ -617,44 +485,30 @@ relatórios de problemas.
 O Bootstrap adota uma estratégia de releases baseada em **versões
 semânticas (Semantic Versioning - SemVer)**, onde:
 
--   **Mudanças de versão principal (major - X.0.0)** indicam alterações
-    > que podem quebrar compatibilidade com versões anteriores (exemplo:
-    > transição da v4 para a v5).
+-   **Mudanças de versão principal (major - X.0.0)** indicam alterações que podem quebrar compatibilidade com versões anteriores (exemplo: transição da v4 para a v5).
 
--   **Mudanças de versão secundária (minor - X.Y.0)** introduzem novos
-    > recursos mantendo compatibilidade com versões anteriores.
+-   **Mudanças de versão secundária (minor - X.Y.0)** introduzem novos recursos mantendo compatibilidade com versões anteriores.
 
--   **Correções de versão patch (patch - X.Y.Z)** focam em **correções
-    > de bugs, melhorias de desempenho e ajustes de acessibilidade**.
+-   **Correções de versão patch (patch - X.Y.Z)** focam em **correções de bugs, melhorias de desempenho e ajustes de acessibilidade**.
 
 Além disso, o projeto segue um ciclo de **releases alfa, beta e
 estáveis**, onde:
 
--   **Versões alfa e beta** são disponibilizadas para testes e
-    > refinamentos antes do lançamento estável.
+-   **Versões alfa e beta** são disponibilizadas para testes e refinamentos antes do lançamento estável.
 
--   **Versões estáveis** contêm melhorias refinadas, com documentação e
-    > suporte mais amplo.
+-   **Versões estáveis** contêm melhorias refinadas, com documentação e suporte mais amplo.
 
 #### **2. Critérios para Disponibilização das Releases**
 
 A disponibilização de uma nova versão segue critérios bem definidos:
 
--   **Correção de bugs críticos**: Atualizações rápidas (patches) são
-    > feitas quando há falhas que impactam diretamente a usabilidade da
-    > biblioteca.
+-   **Correção de bugs críticos**: Atualizações rápidas (patches) são feitas quando há falhas que impactam diretamente a usabilidade da biblioteca.
 
--   **Melhorias progressivas**: As releases minor incluem refinamentos
-    > na experiência do usuário, otimizações de código e introdução de
-    > novos utilitários CSS/JS.
+-   **Melhorias progressivas**: As releases minor incluem refinamentos na experiência do usuário, otimizações de código e introdução de novos utilitários CSS/JS.
 
--   **Garantia de compatibilidade**: Alterações significativas são
-    > testadas em diferentes ambientes e documentadas adequadamente
-    > antes da liberação.
+-   **Garantia de compatibilidade**: Alterações significativas são testadas em diferentes ambientes e documentadas adequadamente antes da liberação.
 
--   **Acessibilidade e conformidade com padrões**: Cada atualização
-    > busca melhorias na acessibilidade (seguindo WCAG e ARIA) e
-    > compatibilidade com navegadores.
+-   **Acessibilidade e conformidade com padrões**: Cada atualização busca melhorias na acessibilidade (seguindo WCAG e ARIA) e compatibilidade com navegadores.
 
 #### **3. Perfis Técnicos dos Contribuidores**
 
@@ -662,41 +516,28 @@ Com base na análise das releases e no artigo **\"Mining the Technical
 Roles of GitHub Users\"**, os perfis técnicos mais presentes nas
 contribuições do Bootstrap incluem:
 
--   **Frontend Engineers:** Contribuem significativamente para melhorias
-    > no CSS, variáveis Sass, e estilização de componentes.
+-   **Frontend Engineers:** Contribuem significativamente para melhorias no CSS, variáveis Sass, e estilização de componentes.
 
--   **JavaScript Developers:** Focam na correção de bugs e aprimoramento
-    > da lógica interativa dos componentes.
+-   **JavaScript Developers:** Focam na correção de bugs e aprimoramento da lógica interativa dos componentes.
 
--   **UX Designers e Especialistas em Acessibilidade:** Trabalham na
-    > melhoria da experiência do usuário e acessibilidade dos
-    > componentes.
+-   **UX Designers e Especialistas em Acessibilidade:** Trabalham na melhoria da experiência do usuário e acessibilidade dos componentes.
 
--   **DevOps e Infraestrutura:** Responsáveis por otimizações no
-    > pipeline CI/CD, testes automatizados e compatibilidade com
-    > diferentes versões do Node.js.
+-   **DevOps e Infraestrutura:** Responsáveis por otimizações no pipeline CI/CD, testes automatizados e compatibilidade com diferentes versões do Node.js.
 
 #### **4. Padrões Identificados nas Releases**
 
 A partir da análise das últimas 10 releases, identificamos alguns
 padrões:
 
--   **Foco contínuo na modularização do CSS e JavaScript**: Uso
-    > crescente de variáveis CSS para facilitar personalização e
-    > manutenção.
+-   **Foco contínuo na modularização do CSS e JavaScript**: Uso crescente de variáveis CSS para facilitar personalização e manutenção.
 
--   **Aprimoramento constante da acessibilidade**: Melhorias em cores,
-    > contraste, navegação por teclado e atributos ARIA.
+-   **Aprimoramento constante da acessibilidade**: Melhorias em cores, contraste, navegação por teclado e atributos ARIA.
 
--   **Expansão do suporte para diferentes frameworks e ferramentas**:
-    > Atualizações compatíveis com Webpack, Vite, Parcel e React.
+-   **Expansão do suporte para diferentes frameworks e ferramentas**: Atualizações compatíveis com Webpack, Vite, Parcel e React.
 
--   **Refinamento da experiência do usuário**: Melhorias na interação
-    > com botões, modais, navegação e componentes dinâmicos.
+-   **Refinamento da experiência do usuário**: Melhorias na interação com botões, modais, navegação e componentes dinâmicos.
 
--   **Manutenção ativa da documentação**: Atualizações frequentes para
-    > garantir que as novas funcionalidades sejam bem explicadas e
-    > acessíveis para desenvolvedores.
+-   **Manutenção ativa da documentação**: Atualizações frequentes para garantir que as novas funcionalidades sejam bem explicadas e acessíveis para desenvolvedores.
 
 ### **Segunda etapa da atividade**
 

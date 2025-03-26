@@ -8,19 +8,21 @@ O Bootstrap segue um modelo colaborativo, onde desenvolvedores de todo o mundo c
 
 ## Análise de Releases do Bootstrap
 
-### 1 - Análise Individual das Releases
-
+### Passo 1: Análise Individual das Releases
 Para cada uma das 10 releases enviadas, faça a análise considerando os seguintes pontos:
 
-1. **Nome da Release:** Identifique a versão da release analisada (Ex.: v4.5.0).
-2. **Objetivo Principal:** Descreva o foco central da release (correção de bugs críticos, introdução de novos recursos, melhorias de performance, etc.).
-3. **Principais Alterações:** Liste as alterações significativas e as categorize, seguem alguns exemplos:
-    - **Mudanças no CSS:** Alterações em estilos, variáveis Sass, classes utilitárias, etc.
-    - **Mudanças no JavaScript:** Correção de bugs, aprimoramento de lógica interativa, novas funcionalidades.
-    - **Acessibilidade:** Melhorias para conformidade com WCAG e ARIA.
-    - **Documentação:** Alterações e aprimoramentos na documentação.
-4. **Impacto e Justificativa:** Explique o impacto das mudanças e o motivo da implementação (Ex.: resolver problemas reportados pela comunidade, atender demandas de mercado).
-5. **Contribuições Notáveis:** Identifique contribuições relevantes e, se possível, o perfil dos contribuidores envolvidos.
+#### Principais mudanças:
+- Identifique correções críticas, melhorias na acessibilidade, ajustes de documentação e correções visuais em componentes (CSS, JS).
+- Detalhe atualizações em dependências e melhorias no pipeline de testes automatizados.
+- Mencione ajustes no suporte a temas (light/dark mode), compatibilidade com compiladores Sass, correções em RTL (Right-to-Left) e sanitização de HTML.
+- Destaque melhorias arquiteturais como modularização no Sass, saneamento de HTML para segurança e otimizações de performance.
+
+#### Características Relevantes:
+- **Áreas afetadas:** Quais partes do projeto foram impactadas (CSS, JavaScript, Documentação, DevOps).
+- **Perfis técnicos envolvidos:** Identifique os tipos de contribuidores principais (Frontend Engineers, JavaScript Developers, DevOps, etc.).
+- **Contribuidores principais:** Identifique, se possível, a equipe central do Bootstrap e membros recorrentes da comunidade open-source.
+- **Padrões arquiteturais aplicados:** Cite práticas como modularidade, acessibilidade (WCAG, ARIA) e compatibilidade com navegadores.
+- **Frequência de contribuição por tipo de desenvolvedor:** Qual perfil de desenvolvedor parece ser mais ativo em cada release (Frontend, DevOps, etc.).
 
 ---
 

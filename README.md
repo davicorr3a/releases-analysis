@@ -1,5 +1,5 @@
 # **Análise das Releases do Bootstrap**
-###Gabriel Argôlo Julião dos Santos, Davi de Andrade Corrêa
+### Gabriel Argôlo Julião dos Santos, Davi de Andrade Corrêa
 
 Será apresentada a estratégia de releases do projeto **Bootstrap**,
 identificando a organização, hierarquia e critérios utilizados para

@@ -1,4 +1,5 @@
 # **Análise das Releases do Bootstrap**
+###Gabriel Argôlo Julião dos Santos, Davi de Andrade Corrêa
 
 Será apresentada a estratégia de releases do projeto **Bootstrap**,
 identificando a organização, hierarquia e critérios utilizados para
@@ -565,137 +566,147 @@ como:
 O script desenvolvido realiza as seguintes etapas para traçar o perfil
 dos desenvolvedores:
 
-1.  **Coleta de commits**: Obtém os commits de cada release selecionada diretamente da API do GitHub.
-
-2.  **Identificação de desenvolvedores**: Extrai os nomes e logins dos autores dos commits.
-
-3.  **Consulta de perfis no GitHub**: Para cada autor, acessa a API pública do GitHub e coleta dados como:
-
-    -   Repositórios públicos
-
-    -   Seguidores
-
-    -   Empresa associada
-
-    -   Linguagens de programação mais utilizadas
-
-4.  **Classificação técnica**: Cada desenvolvedor é categorizado de acordo com as linguagens utilizadas, associando-as a diferentes **áreas de especialização** (Frontend, Backend, Mobile, Data Science, DevOps).
-
-5.  **Armazenamento e processamento**: Todos os dados são organizados em um DataFrame do **Pandas**, processados e exportados para um **arquivo CSV consolidado**.
-
-#### **Funcionamento do Script**
-
-O script desenvolvido automatiza o processo de extração de informações e
-a classificação dos desenvolvedores. Ele opera da seguinte forma:
-
--   O usuário insere uma ou mais releases do Bootstrap.
-
--   O script acessa a API do GitHub para **coletar os commits** dessas releases e identificar os respectivos desenvolvedores.
-
--   Para cada desenvolvedor encontrado, são extraídas **informações de perfil**, incluindo as linguagens mais utilizadas e suas contribuições anteriores.
-
--   Com base nas linguagens de programação, o script classifica o desenvolvedor em categorias técnicas predefinidas, como **Frontend, Backend, DevOps, Mobile ou Data Science**.
-
--   **Caso o desenvolvedor tenha participado de múltiplas releases**, suas contribuições são **agregadas em um único registro**, evitando duplicações e garantindo uma análise mais precisa.
-
--   O resultado final é salvo em um arquivo **CSV estruturado**, que pode ser utilizado para gerar insights sobre a distribuição dos perfis técnicos dentro do projeto Bootstrap.
+1.  **Recebe releases como input**
+    
+    *   O usuário digita por exemplo: v5.3.3, v5.2.0.
+        
+2.  **Busca os commits de cada release**
+    
+    *   Usa a API do GitHub para buscar até 100 commits por release.
+        
+    *   Pega o autor e a mensagem de cada commit.
+        
+3.  **Para cada autor encontrado:**
+    
+    *   Se for um usuário do GitHub com login, ele:
+        
+        *   Busca o perfil completo do usuário (nome, bio, empresa, seguidores, etc.).
+            
+        *   Busca todos os repositórios públicos desse usuário.
+            
+        *   Conta quais linguagens ele mais usou.
+            
+        *   Com base nas linguagens, classifica esse dev como:
+            
+            *   **Frontend:** se usar JS, TS, HTML, CSS...
+                
+            *   **Backend:** se usar Python, Java, PHP...
+                
+            *   **DevOps:** se usar Shell, Dockerfile, Terraform...
+                
+            *   **Mobile ou Data Science** também são categorias possíveis.
+                
+4.  **Organiza os dados**
+    
+    *   Agrupa todas as mensagens de commit feitas pelo dev.
+        
+    *   Junta as releases em que ele contribuiu.
+        
+5.  **Gera um relatório**
+    
+    *   Cria um DataFrame com pandas contendo todas as informações:
+        
+        *   login, nome, linguagens, perfil técnico, mensagens de commit e releases.
+            
+    *   Salva tudo num arquivo .csv.
     
 ### **Script utilizado em python:**
 
 ```python
-"""
-ANÁLISE DE DESENVOLVEDORES GITHUB POR RELEASE
-Script que analisa contribuidores de releases específicas, classificando seus perfis técnicos
-baseados nas linguagens de programação que utilizam.
-"""
-
 import requests
 import pandas as pd
 import time
 
-# CONFIGURAÇÕES DA API DO GITHUB
-GITHUB_TOKEN = "insira_o_seu_token_aqui"  # Token de acesso pessoal do GitHub
-REPO = "twbs/bootstrap"  # Repositório a ser analisado (formato: 'dono/repo')
-HEADERS = {"Authorization": f"token {GITHUB_TOKEN}"}  # Cabeçalho para autenticação
+# Token de acesso pessoal do GitHub (necessário para autenticação)
+GITHUB_TOKEN = "insira o token"
 
-# MAPEAMENTO DE LINGUAGENS PARA PERFIS TÉCNICOS
+# Repositório a ser analisado (exemplo: "twbs/bootstrap")
+REPO = "twbs/bootstrap"
+
+# Cabeçalhos da requisição incluindo o token de autenticação
+HEADERS = {"Authorization": f"token {GITHUB_TOKEN}"}
+
+# Mapeamento de linguagens para perfis técnicos
 ROLE_MAPPING = {
-    # Frontend
     "JavaScript": "Frontend",
     "TypeScript": "Frontend",
     "CSS": "Frontend",
     "HTML": "Frontend",
-    # Backend
+    "Sass": "Frontend",
+    "Less": "Frontend",
     "Python": "Backend",
-    "Java": "Backend",
-    # Data Science
     "Jupyter Notebook": "Data Science",
-    # Mobile
+    "R": "Data Science",
+    "Java": "Backend",
+    "C#": "Backend",
+    "Go": "Backend",
+    "PHP": "Backend",
+    "Ruby": "Backend",
     "Swift": "Mobile",
-    # DevOps
+    "Kotlin": "Mobile",
+    "Objective-C": "Mobile",
+    "Dart": "Mobile",
     "Shell": "DevOps",
-    # ... (outras linguagens podem ser adicionadas)
+    "Dockerfile": "DevOps",
+    "Terraform": "DevOps",
+    "PowerShell": "DevOps"
 }
 
-# VARIÁVEIS GLOBAIS PARA ARMAZENAMENTO
-processed_developers = {}  # Cache de desenvolvedores processados
-processed_authors = set()  # Autores já identificados
+# Dicionário para armazenar desenvolvedores já processados
+processed_developers = {}
 
+# (Opcional) Lista de autores já verificados
+processed_authors = set()
+
+# Função para obter os commits de uma release específica
 def get_commits_by_release(release_tag):
-    """
-    Obtém todos os commits associados a uma release específica
-    Args:
-        release_tag (str): Tag da release (ex: 'v5.3.3')
-    Returns:
-        list: Lista de dicionários com informações dos commits
-    """
     url = f"https://api.github.com/repos/{REPO}/commits"
-    params = {"sha": release_tag, "per_page": 100}  # Paginação para limitar resultados
-    
+    params = {"sha": release_tag, "per_page": 100}
     response = requests.get(url, headers=HEADERS, params=params)
 
-    # Tratamento de erros
     if response.status_code == 401:
-        print("Erro: Token inválido! Verifique suas credenciais do GitHub.")
+        print("❌ Erro: Token inválido! Verifique suas credenciais do GitHub.")
         exit(1)
     if response.status_code != 200:
-        print(f"Erro ao obter commits para {release_tag}: {response.json()}")
+        print(f"❌ Erro ao obter commits para {release_tag}:\n{response.json()}")
         return []
 
-    # Processa os commits
-    return [{
-        "author": commit["author"]["login"] if commit.get("author") else commit["commit"]["author"]["name"],
-        "commit_message": commit["commit"]["message"],
-        "release": release_tag
-    } for commit in response.json()]
+    commits = response.json()
+    commit_data = []
 
+    for commit in commits:
+        # Pega o login do autor (se existir) ou usa o nome do commit
+        author_login = commit["author"]["login"] if commit.get("author") and commit["author"].get("login") else None
+        author_name = commit["commit"]["author"]["name"]
+        commit_message = commit["commit"]["message"]
+        author = author_login if author_login else author_name
+
+        commit_data.append({
+            "author": author,
+            "commit_message": commit_message,
+            "release": release_tag
+        })
+    return commit_data
+
+# Função para buscar informações de um desenvolvedor
 def get_developer_info(username):
-    """
-    Obtém informações detalhadas de um desenvolvedor
-    Args:
-        username (str): Login/nome do desenvolvedor
-    Returns:
-        dict: Dicionário com perfil completo ou None se erro
-    """
-    # Verifica cache primeiro
     if username in processed_developers:
         return processed_developers[username]
 
-    # Requisição à API do GitHub
-    response = requests.get(f"https://api.github.com/users/{username}", headers=HEADERS)
+    url = f"https://api.github.com/users/{username}"
+    response = requests.get(url, headers=HEADERS)
 
-    # Tratamento de erros
     if response.status_code == 404:
-        print(f"Usuário {username} não encontrado.")
+        print(f"⚠️ Usuário {username} não encontrado no GitHub.")
         return None
     if response.status_code != 200:
-        print(f"Erro ao obter usuário {username}")
+        print(f"❌ Erro ao obter usuário {username}")
         return None
 
-    # Processa dados do desenvolvedor
     user_data = response.json()
     languages = get_developer_languages(username)
-    
+    profile = classify_developer(languages)
+
     dev_info = {
         "login": user_data.get("login"),
         "name": user_data.get("name"),
@@ -704,103 +715,80 @@ def get_developer_info(username):
         "public_repos": user_data.get("public_repos"),
         "followers": user_data.get("followers"),
         "languages": languages,
-        "perfil_tecnico": classify_developer(languages),
+        "perfil_tecnico": profile,
         "commit_messages": [],
         "releases": set()
     }
 
-    # Armazena em cache
     processed_developers[username] = dev_info
     return dev_info
 
+# Função que retorna as linguagens mais usadas pelo desenvolvedor
 def get_developer_languages(username):
-    """
-    Identifica as linguagens mais utilizadas por um desenvolvedor
-    Args:
-        username (str): Login do desenvolvedor
-    Returns:
-        list: Tuplas (linguagem, contagem) ordenadas por uso
-    """
-    response = requests.get(
-        f"https://api.github.com/users/{username}/repos",
-        headers=HEADERS,
-        params={"per_page": 100}  # Limite máximo por página
-    )
+    url = f"https://api.github.com/users/{username}/repos"
+    response = requests.get(url, headers=HEADERS, params={"per_page": 100})
 
     if response.status_code != 200:
         return []
 
-    # Contagem de linguagens nos repositórios
+    repos = response.json()
     lang_count = {}
-    for repo in response.json():
-        if lang := repo.get("language"):
+
+    for repo in repos:
+        lang = repo.get("language")
+        if lang:
             lang_count[lang] = lang_count.get(lang, 0) + 1
 
     return sorted(lang_count.items(), key=lambda x: x[1], reverse=True)
 
+# Função que classifica o perfil técnico com base nas linguagens
 def classify_developer(languages):
-    """
-    🏷 Classifica o perfil técnico baseado nas linguagens
-    Args:
-        languages (list): Lista de tuplas (linguagem, contagem)
-    Returns:
-        str: Perfil(s) técnico(s) concatenados
-    """
-    roles = {ROLE_MAPPING[lang] for lang, _ in languages if lang in ROLE_MAPPING}
+    roles = set()
+    for lang, _ in languages:
+        if lang in ROLE_MAPPING:
+            roles.add(ROLE_MAPPING[lang])
     return ", ".join(roles) if roles else "Sem Classificação"
 
+# Função principal que analisa as releases fornecidas
 def analyze_releases(release_tags):
-    """
-    Função principal que coordena a análise
-    Args:
-        release_tags (list): Lista de tags de release para análise
-    """
-    print("Iniciando análise de releases...")
     all_commits = []
 
-    # Coleta commits de todas as releases
     for release_tag in release_tags:
-        print(f"Analisando release: {release_tag}...")
+        print(f"📦 Analisando a release {release_tag}...")
         commits = get_commits_by_release(release_tag)
         all_commits.extend(commits)
-        time.sleep(1)  # Respeita rate limit da API
 
-    # Processa cada commit
     for commit in all_commits:
-        if dev_info := get_developer_info(commit["author"]):
-            dev_info["commit_messages"].append(commit["commit_message"])
-            dev_info["releases"].add(commit["release"])
+        author = commit["author"]
+        commit_message = commit["commit_message"]
+        release_tag = commit["release"]
 
-    # Prepara dados para exportação
+        print(f"🔍 Coletando dados de {author}...")
+        dev_info = get_developer_info(author)
+        if dev_info:
+            dev_info["commit_messages"].append(commit_message)
+            dev_info["releases"].add(release_tag)
+
+    # Pós-processamento para organizar os dados
     for dev in processed_developers.values():
         dev["releases"] = ", ".join(sorted(dev["releases"]))
         dev["commit_messages"] = "; ".join(dev["commit_messages"])
-        dev["languages"] = ", ".join([f"{lang} ({count})" for lang, count in dev["languages"]])
 
-    # Gera relatório
     df = pd.DataFrame(processed_developers.values())
-    
-    if not df.empty:
-        file_path = "developer_analysis.csv"
-        df.to_csv(file_path, index=False)
-        print(f"\n Análise concluída! Resultados salvos em {file_path}")
-        print(" Amostra dos dados:\n", df.head())
-    else:
-        print(" Nenhum dado foi coletado")
+    print("\n✅ Análise Concluída!")
+    print(df)
 
-# Ponto de entrada do script
-if __name__ == "__main__":
-    print("""
-    GitHub Developer Analyzer
-    --------------------------
-    Analisa contribuidores de releases específicas,
-    classificando seus perfis técnicos.
-    """)
-    
-    # Exemplo: v5.3.3, v5.2.0
-    release_input = input("Digite as releases separadas por vírgula: ")
-    analyze_releases([r.strip() for r in release_input.split(",")])
+    if not df.empty:
+        file_path = "insira o caminho que deseja salvar"
+        df.to_csv(file_path, index=False, mode="w")
+        print(f"\n💾 Relatório salvo em {file_path}")
+
+# Execução do script
+release_input = input("Digite as releases separadas por vírgula (exemplo: v5.3.3, v5.2.0): ")
+release_list = [r.strip() for r in release_input.split(",")]
+analyze_releases(release_list)
 ```
+
 
 ### **Segunda etapa da atividade - Resultados e conclusões com base na análise de algumas releases**
 

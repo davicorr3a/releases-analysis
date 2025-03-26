@@ -23,3 +23,25 @@ Para cada uma das 10 releases enviadas, faça a análise considerando os seguint
 5. **Contribuições Notáveis:** Identifique contribuições relevantes e, se possível, o perfil dos contribuidores envolvidos.
 
 ---
+
+### 2 - Análise Geral da Estratégia de Releases
+
+Após revisar todas as releases, elabore um resumo abrangente da estratégia de releases do projeto, seguindo o formato abaixo:
+
+#### Perfil Geral da Estratégia de Releases do Bootstrap
+
+**1. Organização e Hierarquia das Releases:**  
+Explique como o projeto estrutura suas versões (major, minor, patch), a frequência e o propósito das atualizações, além do uso de versões alfa, beta e estáveis.
+
+**2. Critérios para Disponibilização das Releases:**  
+Detalhe os principais critérios que levam à disponibilização de uma nova versão, como correção de bugs críticos, melhorias progressivas, compatibilidade retroativa, acessibilidade e conformidade com padrões.
+
+**3. Perfis Técnicos dos Contribuidores:**  
+Baseado nas contribuições analisadas, identifique os principais perfis técnicos dos desenvolvedores envolvidos (Frontend Engineers, JavaScript Developers, DevOps, UX Designers, etc.). Leve em consideração o artigo _'Mining the Technical Roles of GitHub Users'_ se necessário.
+
+**4. Padrões Identificados nas Releases:**  
+Descreva padrões recorrentes observados nas releases, como modularização do código, foco em acessibilidade, suporte a frameworks, aprimoramentos na experiência do usuário e manutenção da documentação.
+
+> **Observação:** Foque principalmente no perfil dos desenvolvedores, pois essa é a parte mais importante para mim.
+
+---

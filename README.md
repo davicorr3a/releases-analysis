@@ -778,269 +778,166 @@ a classificação dos desenvolvedores. Ele opera da seguinte forma:
 -   O resultado final é salvo em um arquivo **CSV estruturado**, que
     > pode ser utilizado para gerar insights sobre a distribuição dos
     > perfis técnicos dentro do projeto Bootstrap.
-
+    
+### **Script utilizado em python:**
+```python
 import requests
-
 import pandas as pd
-
 import time
 
-GITHUB_TOKEN = \"insira o token\"
+# Configuração da API do GitHub
+GITHUB_TOKEN = "insira_o_seu_token_aqui"  # 👈 Substitua pelo seu token
+REPO = "twbs/bootstrap"  # 👈 Pode ser alterado para outro repositório
+HEADERS = {"Authorization": f"token {GITHUB_TOKEN}"}
 
-REPO = \"twbs/bootstrap\"
-
-HEADERS = {\"Authorization\": f\"token {GITHUB_TOKEN}\"}
-
+# Mapeamento de linguagens para perfis técnicos
 ROLE_MAPPING = {
-
-\"JavaScript\": \"Frontend\",
-
-\"TypeScript\": \"Frontend\",
-
-\"CSS\": \"Frontend\",
-
-\"HTML\": \"Frontend\",
-
-\"Sass\": \"Frontend\",
-
-\"Less\": \"Frontend\",
-
-\"Python\": \"Backend\",
-
-\"Jupyter Notebook\": \"Data Science\",
-
-\"R\": \"Data Science\",
-
-\"Java\": \"Backend\",
-
-\"C#\": \"Backend\",
-
-\"Go\": \"Backend\",
-
-\"PHP\": \"Backend\",
-
-\"Ruby\": \"Backend\",
-
-\"Swift\": \"Mobile\",
-
-\"Kotlin\": \"Mobile\",
-
-\"Objective-C\": \"Mobile\",
-
-\"Dart\": \"Mobile\",
-
-\"Shell\": \"DevOps\",
-
-\"Dockerfile\": \"DevOps\",
-
-\"Terraform\": \"DevOps\",
-
-\"PowerShell\": \"DevOps\"
-
+    "JavaScript": "Frontend",
+    "TypeScript": "Frontend",
+    "CSS": "Frontend",
+    "HTML": "Frontend",
+    "Sass": "Frontend",
+    "Less": "Frontend",
+    "Python": "Backend",
+    "Jupyter Notebook": "Data Science",
+    "R": "Data Science",
+    "Java": "Backend",
+    "C#": "Backend",
+    "Go": "Backend",
+    "PHP": "Backend",
+    "Ruby": "Backend",
+    "Swift": "Mobile",
+    "Kotlin": "Mobile",
+    "Objective-C": "Mobile",
+    "Dart": "Mobile",
+    "Shell": "DevOps",
+    "Dockerfile": "DevOps",
+    "Terraform": "DevOps",
+    "PowerShell": "DevOps"
 }
 
+# Cache de dados
 processed_developers = {}
-
 processed_authors = set()
 
 def get_commits_by_release(release_tag):
+    """Obtém commits de uma release específica"""
+    url = f"https://api.github.com/repos/{REPO}/commits"
+    params = {"sha": release_tag, "per_page": 100}
+    response = requests.get(url, headers=HEADERS, params=params)
 
-url = f\"https://api.github.com/repos/{REPO}/commits\"
+    if response.status_code == 401:
+        print("❌ Erro: Token inválido! Verifique suas credenciais do GitHub.")
+        exit(1)
 
-params = {\"sha\": release_tag, \"per_page\": 100}
+    if response.status_code != 200:
+        print(f"❌ Erro ao obter commits para {release_tag}: {response.json()}")
+        return []
 
-response = requests.get(url, headers=HEADERS, params=params)
-
-if response.status_code == 401:
-
-print(\"❌ Erro: Token inválido! Verifique suas credenciais do
-GitHub.\")
-
-exit(1)
-
-if response.status_code != 200:
-
-print(f\"❌ Erro ao obter commits para {release_tag}:
-{response.json()}\")
-
-return \[\]
-
-commits = response.json()
-
-commit_data = \[\]
-
-for commit in commits:
-
-author_login = commit\[\"author\"\]\[\"login\"\] if
-commit.get(\"author\") and commit\[\"author\"\].get(\"login\") else None
-
-author_name = commit\[\"commit\"\]\[\"author\"\]\[\"name\"\]
-
-commit_message = commit\[\"commit\"\]\[\"message\"\]
-
-author = author_login if author_login else author_name
-
-commit_data.append({
-
-\"author\": author,
-
-\"commit_message\": commit_message,
-
-\"release\": release_tag
-
-})
-
-return commit_data
+    return [{
+        "author": commit["author"]["login"] if commit.get("author") and commit["author"].get("login") 
+                else commit["commit"]["author"]["name"],
+        "commit_message": commit["commit"]["message"],
+        "release": release_tag
+    } for commit in response.json()]
 
 def get_developer_info(username):
+    """Coleta informações detalhadas de um desenvolvedor"""
+    if username in processed_developers:
+        return processed_developers[username]
 
-if username in processed_developers:
+    response = requests.get(f"https://api.github.com/users/{username}", headers=HEADERS)
 
-return processed_developers\[username\]
+    if response.status_code == 404:
+        print(f"⚠️ Usuário {username} não encontrado no GitHub.")
+        return None
 
-url = f\"https://api.github.com/users/{username}\"
+    if response.status_code != 200:
+        print(f"❌ Erro ao obter usuário {username}")
+        return None
 
-response = requests.get(url, headers=HEADERS)
+    user_data = response.json()
+    languages = get_developer_languages(username)
 
-if response.status_code == 404:
+    dev_info = {
+        "login": user_data.get("login"),
+        "name": user_data.get("name"),
+        "bio": user_data.get("bio"),
+        "company": user_data.get("company"),
+        "public_repos": user_data.get("public_repos"),
+        "followers": user_data.get("followers"),
+        "languages": languages,
+        "perfil_tecnico": classify_developer(languages),
+        "commit_messages": [],
+        "releases": set()
+    }
 
-print(f\"⚠️ Usuário {username} não encontrado no GitHub.\")
-
-return None
-
-if response.status_code != 200:
-
-print(f\"❌ Erro ao obter usuário {username}\")
-
-return None
-
-user_data = response.json()
-
-languages = get_developer_languages(username)
-
-profile = classify_developer(languages)
-
-dev_info = {
-
-\"login\": user_data.get(\"login\"),
-
-\"name\": user_data.get(\"name\"),
-
-\"bio\": user_data.get(\"bio\"),
-
-\"company\": user_data.get(\"company\"),
-
-\"public_repos\": user_data.get(\"public_repos\"),
-
-\"followers\": user_data.get(\"followers\"),
-
-\"languages\": languages,
-
-\"perfil_tecnico\": profile,
-
-\"commit_messages\": \[\],
-
-\"releases\": set()
-
-}
-
-processed_developers\[username\] = dev_info
-
-return dev_info
+    processed_developers[username] = dev_info
+    return dev_info
 
 def get_developer_languages(username):
+    """Identifica as linguagens mais usadas pelo desenvolvedor"""
+    response = requests.get(
+        f"https://api.github.com/users/{username}/repos",
+        headers=HEADERS,
+        params={"per_page": 100}
+    )
 
-url = f\"https://api.github.com/users/{username}/repos\"
+    if response.status_code != 200:
+        return []
 
-response = requests.get(url, headers=HEADERS, params={\"per_page\":
-100})
+    repos = response.json()
+    lang_count = {}
 
-if response.status_code != 200:
+    for repo in repos:
+        if lang := repo.get("language"):
+            lang_count[lang] = lang_count.get(lang, 0) + 1
 
-return \[\]
-
-repos = response.json()
-
-lang_count = {}
-
-for repo in repos:
-
-lang = repo.get(\"language\")
-
-if lang:
-
-lang_count\[lang\] = lang_count.get(lang, 0) + 1
-
-return sorted(lang_count.items(), key=lambda x: x\[1\], reverse=True)
+    return sorted(lang_count.items(), key=lambda x: x[1], reverse=True)
 
 def classify_developer(languages):
-
-roles = set()
-
-for lang, \_ in languages:
-
-if lang in ROLE_MAPPING:
-
-roles.add(ROLE_MAPPING\[lang\])
-
-return \", \".join(roles) if roles else \"Sem Classificação\"
+    """Classifica o perfil técnico baseado nas linguagens"""
+    roles = {ROLE_MAPPING[lang] for lang, _ in languages if lang in ROLE_MAPPING}
+    return ", ".join(roles) if roles else "Sem Classificação"
 
 def analyze_releases(release_tags):
+    """Função principal que coordena a análise"""
+    print("🚀 Iniciando análise de releases...")
+    
+    all_commits = []
+    for release_tag in release_tags:
+        print(f"🔎 Analisando release: {release_tag}...")
+        all_commits.extend(get_commits_by_release(release_tag))
+        time.sleep(1)  # Rate limit
 
-all_commits = \[\]
+    for commit in all_commits:
+        if dev_info := get_developer_info(commit["author"]):
+            dev_info["commit_messages"].append(commit["commit_message"])
+            dev_info["releases"].add(commit["release"])
 
-for release_tag in release_tags:
+    # Prepara dados para exportação
+    for dev in processed_developers.values():
+        dev["releases"] = ", ".join(sorted(dev["releases"]))
+        dev["commit_messages"] = "; ".join(dev["commit_messages"])
+        dev["languages"] = ", ".join([f"{lang} ({count})" for lang, count in dev["languages"]])
 
-print(f\"🔎 Analisando a release: {release_tag}\...\")
+    df = pd.DataFrame(processed_developers.values())
+    
+    if not df.empty:
+        file_path = "developer_analysis.csv"
+        df.to_csv(file_path, index=False)
+        print(f"\n✅ Análise concluída! Resultados salvos em {file_path}")
+        print(df.head())
+    else:
+        print("❌ Nenhum dado foi coletado")
 
-commits = get_commits_by_release(release_tag)
-
-all_commits.extend(commits)
-
-for commit in all_commits:
-
-author = commit\[\"author\"\]
-
-commit_message = commit\[\"commit_message\"\]
-
-release_tag = commit\[\"release\"\]
-
-print(f\"📌 Coletando dados de {author}\...\")
-
-dev_info = get_developer_info(author)
-
-if dev_info:
-
-dev_info\[\"commit_messages\"\].append(commit_message)
-
-dev_info\[\"releases\"\].add(release_tag)
-
-for dev in processed_developers.values():
-
-dev\[\"releases\"\] = \", \".join(sorted(dev\[\"releases\"\]))
-
-dev\[\"commit_messages\"\] = \"; \".join(dev\[\"commit_messages\"\])
-
-df = pd.DataFrame(processed_developers.values())
-
-print(\"\\n📊 Análise Concluída!\")
-
-print(df)
-
-if not df.empty:
-
-file_path = \"insira o caminho que deseja salvar\"
-
-df.to_csv(file_path, index=False, mode=\"w\")
-
-print(f\"\\n📁 Relatório salvo como {file_path}\")
-
-release_input = input(\"Digite as releases separadas por vírgula
-(exemplo: v5.3.3, v5.2.0): \")
-
-release_list = \[r.strip() for r in release_input.split(\",\")\]
-
-analyze_releases(release_list)
+# Execução
+if __name__ == "__main__":
+    print("📌 GitHub Developer Analyzer")
+    print("Exemplo: v5.3.3, v5.2.0\n")
+    release_input = input("Digite as releases separadas por vírgula: ")
+    analyze_releases([r.strip() for r in release_input.split(",")])
+```
 
 ### **Segunda etapa da atividade - Resultados e conclusões com base na análise de algumas releases**
 

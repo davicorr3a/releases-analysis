@@ -713,28 +713,22 @@ classificar desenvolvedores com base nos padrões de contribuição e nas
 tecnologias utilizadas. Com essa análise, buscamos responder questões
 como:
 
--   Quais são os perfis predominantes entre os desenvolvedores do
-    > Bootstrap?
+-   Quais são os perfis predominantes entre os desenvolvedores do Bootstrap?
 
--   Como a expertise técnica está distribuída dentro da comunidade do
-    > projeto?
+-   Como a expertise técnica está distribuída dentro da comunidade do projeto?
 
--   Existe alguma correlação entre a natureza da release e os tipos de
-    > profissionais envolvidos?
+-   Existe alguma correlação entre a natureza da release e os tipos de profissionais envolvidos?
 
 #### **Metodologia**
 
 O script desenvolvido realiza as seguintes etapas para traçar o perfil
 dos desenvolvedores:
 
-1.  **Coleta de commits**: Obtém os commits de cada release selecionada
-    > diretamente da API do GitHub.
+1.  **Coleta de commits**: Obtém os commits de cada release selecionada diretamente da API do GitHub.
 
-2.  **Identificação de desenvolvedores**: Extrai os nomes e logins dos
-    > autores dos commits.
+2.  **Identificação de desenvolvedores**: Extrai os nomes e logins dos autores dos commits.
 
-3.  **Consulta de perfis no GitHub**: Para cada autor, acessa a API
-    > pública do GitHub e coleta dados como:
+3.  **Consulta de perfis no GitHub**: Para cada autor, acessa a API pública do GitHub e coleta dados como:
 
     -   Repositórios públicos
 
@@ -744,14 +738,9 @@ dos desenvolvedores:
 
     -   Linguagens de programação mais utilizadas
 
-4.  **Classificação técnica**: Cada desenvolvedor é categorizado de
-    > acordo com as linguagens utilizadas, associando-as a diferentes
-    > **áreas de especialização** (Frontend, Backend, Mobile, Data
-    > Science, DevOps).
+4.  **Classificação técnica**: Cada desenvolvedor é categorizado de acordo com as linguagens utilizadas, associando-as a diferentes **áreas de especialização** (Frontend, Backend, Mobile, Data Science, DevOps).
 
-5.  **Armazenamento e processamento**: Todos os dados são organizados em
-    > um DataFrame do **Pandas**, processados e exportados para um
-    > **arquivo CSV consolidado**.
+5.  **Armazenamento e processamento**: Todos os dados são organizados em um DataFrame do **Pandas**, processados e exportados para um **arquivo CSV consolidado**.
 
 #### **Funcionamento do Script**
 
@@ -760,24 +749,15 @@ a classificação dos desenvolvedores. Ele opera da seguinte forma:
 
 -   O usuário insere uma ou mais releases do Bootstrap.
 
--   O script acessa a API do GitHub para **coletar os commits** dessas
-    > releases e identificar os respectivos desenvolvedores.
+-   O script acessa a API do GitHub para **coletar os commits** dessas releases e identificar os respectivos desenvolvedores.
 
--   Para cada desenvolvedor encontrado, são extraídas **informações de
-    > perfil**, incluindo as linguagens mais utilizadas e suas
-    > contribuições anteriores.
+-   Para cada desenvolvedor encontrado, são extraídas **informações de perfil**, incluindo as linguagens mais utilizadas e suas contribuições anteriores.
 
--   Com base nas linguagens de programação, o script classifica o
-    > desenvolvedor em categorias técnicas predefinidas, como
-    > **Frontend, Backend, DevOps, Mobile ou Data Science**.
+-   Com base nas linguagens de programação, o script classifica o desenvolvedor em categorias técnicas predefinidas, como **Frontend, Backend, DevOps, Mobile ou Data Science**.
 
--   **Caso o desenvolvedor tenha participado de múltiplas releases**,
-    > suas contribuições são **agregadas em um único registro**,
-    > evitando duplicações e garantindo uma análise mais precisa.
+-   **Caso o desenvolvedor tenha participado de múltiplas releases**, suas contribuições são **agregadas em um único registro**, evitando duplicações e garantindo uma análise mais precisa.
 
--   O resultado final é salvo em um arquivo **CSV estruturado**, que
-    > pode ser utilizado para gerar insights sobre a distribuição dos
-    > perfis técnicos dentro do projeto Bootstrap.
+-   O resultado final é salvo em um arquivo **CSV estruturado**, que pode ser utilizado para gerar insights sobre a distribuição dos perfis técnicos dentro do projeto Bootstrap.
     
 ### **Script utilizado em python:**
 
@@ -994,50 +974,33 @@ releases:
 
 #### **1. Perfis Técnicos Dominantes**
 
--   O perfil **Frontend** foi o mais recorrente entre os
-    > desenvolvedores, refletindo a natureza do Bootstrap como um
-    > framework de interface visual.
+-   O perfil **Frontend** foi o mais recorrente entre os desenvolvedores, refletindo a natureza do Bootstrap como um framework de interface visual.
 
--   Desenvolvedores **Full-Stack**, que possuem experiência em
-    > **Frontend e Backend**, também marcaram presença significativa.
+-   Desenvolvedores **Full-Stack**, que possuem experiência em **Frontend e Backend**, também marcaram presença significativa.
 
--   **Data Science e DevOps** tiveram menor participação, indicando que
-    > o foco do projeto continua sendo interfaces web.
+-   **Data Science e DevOps** tiveram menor participação, indicando que o foco do projeto continua sendo interfaces web.
 
 #### **2. Desenvolvedores Mais Ativos**
 
--   **Julien Déramond**: Participou de **seis releases**, sendo um dos
-    > principais contribuidores. Seu perfil técnico abrange **Mobile e
-    > Frontend**, com forte experiência em **TypeScript e JavaScript**.
+-   **Julien Déramond**: Participou de **seis releases**, sendo um dos principais contribuidores. Seu perfil técnico abrange **Mobile e Frontend**, com forte experiência em **TypeScript e JavaScript**.
 
--   **GeoSot**: Contribuiu para quatro releases, com expertise em
-    > **Frontend e Backend**. Suas principais linguagens são **PHP,
-    > JavaScript e Python**.
+-   **GeoSot**: Contribuiu para quatro releases, com expertise em **Frontend e Backend**. Suas principais linguagens são **PHP, JavaScript e Python**.
 
--   **Robert Martin (bertday)**: Participou da release v5.3.3, com um
-    > perfil técnico abrangente em **Mobile, Frontend e Backend**.
+-   **Robert Martin (bertday)**: Participou da release v5.3.3, com um perfil técnico abrangente em **Mobile, Frontend e Backend**.
 
--   **DrejT**: Envolvido em múltiplas releases, com destaque para **Data
-    > Science, Frontend e Backend**, mostrando um perfil mais híbrido.
+-   **DrejT**: Envolvido em múltiplas releases, com destaque para **Data Science, Frontend e Backend**, mostrando um perfil mais híbrido.
 
 #### **3. Distribuição de Contribuições**
 
--   Alguns desenvolvedores, como **dependabot\[bot\]**, participaram de
-    > múltiplas releases, mas suas contribuições foram relacionadas à
-    > manutenção automática de dependências.
+-   Alguns desenvolvedores, como **dependabot\[bot\]**, participaram de múltiplas releases, mas suas contribuições foram relacionadas à manutenção automática de dependências.
 
--   A maior parte dos contribuidores focou em **correções de bugs e
-    > melhorias na documentação**, refletindo uma preocupação contínua
-    > com a usabilidade do framework.
+-   A maior parte dos contribuidores focou em **correções de bugs e melhorias na documentação**, refletindo uma preocupação contínua com a usabilidade do framework.
 
 #### **4. Papel dos Commits nas Releases**
 
--   Os commit messages analisados mostraram que muitos desenvolvedores
-    > estavam envolvidos em **melhorias de documentação**, ajustes de
-    > **CSS/JavaScript** e **refinamento de funcionalidades**.
+-   Os commit messages analisados mostraram que muitos desenvolvedores estavam envolvidos em **melhorias de documentação**, ajustes de **CSS/JavaScript** e **refinamento de funcionalidades**.
 
--   Correções críticas, como o ajuste no **Selector Engine**, foram
-    > feitas por especialistas que já participaram de várias releases.
+-   Correções críticas, como o ajuste no **Selector Engine**, foram feitas por especialistas que já participaram de várias releases.
 
 ### **Conclusão**
 

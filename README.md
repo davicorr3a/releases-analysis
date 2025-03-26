@@ -1,4 +1,5 @@
 # **Análise das Releases do Bootstrap**
+
 ### Gabriel Argôlo Julião dos Santos, Davi de Andrade Corrêa
 
 Será apresentada a estratégia de releases do projeto **Bootstrap**,
@@ -540,6 +541,8 @@ padrões:
 
 -   **Manutenção ativa da documentação**: Atualizações frequentes para garantir que as novas funcionalidades sejam bem explicadas e acessíveis para desenvolvedores.
 
+<img src="./perfil-tecnico.png">
+
 ### **Segunda etapa da atividade**
 
 Esta seção complementa a análise das releases do projeto Bootstrap,
@@ -549,8 +552,8 @@ extração e processamento de dados via API do GitHub**, que coleta
 informações sobre os autores dos commits, as linguagens de programação
 que utilizam e suas principais contribuições dentro do projeto.
 
-A metodologia adotada foi inspirada no artigo *\"Mining the Technical
-Roles of GitHub Users\"*, que propõe uma abordagem para identificar e
+A metodologia adotada foi inspirada no artigo _\"Mining the Technical
+Roles of GitHub Users\"_, que propõe uma abordagem para identificar e
 classificar desenvolvedores com base nos padrões de contribuição e nas
 tecnologias utilizadas. Com essa análise, buscamos responder questões
 como:
@@ -567,49 +570,41 @@ O script desenvolvido realiza as seguintes etapas para traçar o perfil
 dos desenvolvedores:
 
 1.  **Recebe releases como input**
-    
-    *   O usuário digita por exemplo: v5.3.3, v5.2.0.
-        
+
+    -   O usuário digita por exemplo: v5.3.3, v5.2.0.
+
 2.  **Busca os commits de cada release**
-    
-    *   Usa a API do GitHub para buscar até 100 commits por release.
-        
-    *   Pega o autor e a mensagem de cada commit.
-        
+
+    -   Usa a API do GitHub para buscar até 100 commits por release.
+    -   Pega o autor e a mensagem de cada commit.
+
 3.  **Para cada autor encontrado:**
-    
-    *   Se for um usuário do GitHub com login, ele:
-        
-        *   Busca o perfil completo do usuário (nome, bio, empresa, seguidores, etc.).
-            
-        *   Busca todos os repositórios públicos desse usuário.
-            
-        *   Conta quais linguagens ele mais usou.
-            
-        *   Com base nas linguagens, classifica esse dev como:
-            
-            *   **Frontend:** se usar JS, TS, HTML, CSS...
-                
-            *   **Backend:** se usar Python, Java, PHP...
-                
-            *   **DevOps:** se usar Shell, Dockerfile, Terraform...
-                
-            *   **Mobile ou Data Science** também são categorias possíveis.
-                
+
+    -   Se for um usuário do GitHub com login, ele:
+
+        -   Busca o perfil completo do usuário (nome, bio, empresa, seguidores, etc.).
+        -   Busca todos os repositórios públicos desse usuário.
+        -   Conta quais linguagens ele mais usou.
+        -   Com base nas linguagens, classifica esse dev como:
+
+            -   **Frontend:** se usar JS, TS, HTML, CSS...
+            -   **Backend:** se usar Python, Java, PHP...
+            -   **DevOps:** se usar Shell, Dockerfile, Terraform...
+            -   **Mobile ou Data Science** também são categorias possíveis.
+
 4.  **Organiza os dados**
-    
-    *   Agrupa todas as mensagens de commit feitas pelo dev.
-        
-    *   Junta as releases em que ele contribuiu.
-        
+
+    -   Agrupa todas as mensagens de commit feitas pelo dev.
+    -   Junta as releases em que ele contribuiu.
+
 5.  **Gera um relatório**
-    
-    *   Cria um DataFrame com pandas contendo todas as informações:
-        
-        *   login, nome, linguagens, perfil técnico, mensagens de commit e releases.
-            
-    *   Salva tudo num arquivo .csv.
-    
+
+    -   Cria um DataFrame com pandas contendo todas as informações:
+
+        -   login, nome, linguagens, perfil técnico, mensagens de commit e releases.
+
+    -   Salva tudo num arquivo .csv.
+
 ### **Script utilizado em python:**
 
 ```python
@@ -789,10 +784,9 @@ release_list = [r.strip() for r in release_input.split(",")]
 analyze_releases(release_list)
 ```
 
-
 ### **Segunda etapa da atividade - Resultados e conclusões com base na análise de algumas releases**
 
- ## Exemplo do csv gerado:
+## Exemplo do csv gerado:
 
 ![image](https://github.com/user-attachments/assets/c6bc7367-4f8c-4e2c-a21e-18461528a1bc)
 
